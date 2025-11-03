@@ -1,0 +1,68 @@
+#####################################################################
+#                                                                   #
+#  makefile for LGA program  (SUN version)                          #
+#  makefile for LGA program  (SGI version)                          #
+#  makefile for LGA program  (LINUX version)                        #
+#                                                                   #
+#####################################################################
+
+# CFLAGS  = -fast -xtarget=ultra
+# CFLAGS  = -O3 -64 -mips4 -r10000
+# CFLAGS  = -Wall -O3 -ffast-math -funroll-loops
+CFLAGS  = -Wall -O3 
+
+# LFLAGS  = -fast -xtarget=ultra
+# LFLAGS  = -O3 -64 -mips4 -r10000
+# LFLAGS  = -O3 -ffast-math -funroll-loops
+LFLAGS  = -O3 
+
+#####################################################################
+
+LIBS    = -lm
+
+C       = cc
+
+OBJS  = lga.o \
+	tools_1.o tools_2.o tools_3.o tools_4.o tools_5.o tools_6.o
+
+#####################################################################
+#                                                                   #
+#  executables                                                      #
+#                                                                   #
+#####################################################################
+
+all:		lga
+
+lga:		$(OBJS)
+		$(C) $(LFLAGS) -o lga $(OBJS) $(LIBS)
+
+clean:	
+		@rm -f *.o core lga
+
+#####################################################################
+#                                                                   #
+#  objects                                                          #
+#                                                                   #
+#####################################################################
+
+lga.o:		lga.c tools.h
+		$(C) $(CFLAGS) -c lga.c 
+
+tools_1.o:	tools_1.c tools.h
+		$(C) $(CFLAGS) -c tools_1.c 
+
+tools_2.o:	tools_2.c tools.h
+		$(C) $(CFLAGS) -c tools_2.c 
+
+tools_3.o:	tools_3.c tools.h
+		$(C) $(CFLAGS) -c tools_3.c 
+
+tools_4.o:	tools_4.c tools.h
+		$(C) $(CFLAGS) -c tools_4.c
+
+tools_5.o:	tools_5.c tools.h
+		$(C) $(CFLAGS) -c tools_5.c
+
+tools_6.o:	tools_6.c tools.h
+		$(C) $(CFLAGS) -c tools_6.c
+

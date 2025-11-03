@@ -1,0 +1,72 @@
+#####################################################################
+#                                                                   #
+#  makefile for LGA program  (SUN version)                          #
+#  makefile for LGA program  (SGI version)                          #
+#  makefile for LGA program  (LINUX version)                        #
+#  makefile for LGA program  (Windows XP; C++ Intel 11)             #
+#                                                                   #
+#####################################################################
+#    nmake -f Makefile.windows                                      #
+#####################################################################
+
+# CFLAGS  = -fast -xtarget=ultra
+# CFLAGS  = -O3 -64 -mips4 -r10000
+# CFLAGS  = -Wall -O3 -ffast-math -funroll-loops
+# CFLAGS  = /Wall /GZ /RTCs
+# CFLAGS  = /EHsc /TC
+CFLAGS  = /Wall /EHsc /TC /Ot
+# LFLAGS  = -fast -xtarget=ultra
+# LFLAGS  = -O3 -64 -mips4 -r10000
+# LFLAGS  = -O3 -ffast-math -funroll-loops
+LFLAGS  = /F70000000
+
+#####################################################################
+
+# LIBS    = -lm
+
+C       = icl
+
+OBJS  = lga.obj \
+	tools_1.obj tools_2.obj tools_3.obj tools_4.obj tools_5.obj tools_6.obj
+
+#####################################################################
+#                                                                   #
+#  executables                                                      #
+#                                                                   #
+#####################################################################
+
+all:		lga
+
+lga:		$(OBJS)
+		$(C) $(LFLAGS) -o lga_windows.exe $(OBJS) $(LIBS)
+
+clean:	
+		@del *.obj core lga_windows.exe
+
+#####################################################################
+#                                                                   #
+#  objects                                                          #
+#                                                                   #
+#####################################################################
+
+lga.obj:	lga.c tools.h
+		$(C) $(CFLAGS) -c lga.c 
+
+tools_1.obj:	tools_1.c tools.h
+		$(C) $(CFLAGS) -c tools_1.c 
+
+tools_2.obj:	tools_2.c tools.h
+		$(C) $(CFLAGS) -c tools_2.c 
+
+tools_3.obj:	tools_3.c tools.h
+		$(C) $(CFLAGS) -c tools_3.c 
+
+tools_4.obj:	tools_4.c tools.h
+		$(C) $(CFLAGS) -c tools_4.c
+
+tools_5.obj:	tools_5.c tools.h
+		$(C) $(CFLAGS) -c tools_5.c
+
+tools_6.obj:	tools_6.c tools.h
+		$(C) $(CFLAGS) -c tools_6.c
+
